@@ -1,3 +1,8 @@
+# Testing software for Raspberry pi 3 controlling a radio transmitter salvaged from R/C helicopter toy
+# ASK modulation at 27,095 Mhz
+# Maximum speed cannot exceed 1,5 ms per bit due to relays used for interfacing GPIO with external signal.
+
+
 def tx_on():                      	                    # Turn on transmitter
     GPIO.output(pin, GPIO.LOW)
     return
@@ -61,11 +66,6 @@ if __name__ == '__main__':
     import RPi.GPIO as GPIO
     import time
 
-    # Necessary variables
-    seq = []                                            # Container for broadcast sequence
-    stime = 0.0                                         # Synced time
-    tx_start = 0.0                                      # Transmission starting time
-
     # Settings
     pin = 23                                            # GPIO pin number
     compensation = 0.04                                 # Difference in clocks
@@ -83,4 +83,4 @@ if __name__ == '__main__':
             sync_pulse(pulse) # Wake up receiver
             tx_start = time_until(0.2, compensation)
             send_sequence(get_number(seq[i]), pulse, sleep, tx_start) # Send byte
-    #GPIO.cleanup() # Reset GPIO
+    GPIO.cleanup() # Reset GPIO
