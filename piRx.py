@@ -1,3 +1,7 @@
+# Testing software for Raspberry pi B controlling a radio receiver salvaged from R/C helicopter toy
+# ASK modulation at 27,095 Mhz
+# Maximum speed is limited to 1,5 ms per bit due to relays used for interfacing GPIO with external signal.
+
 def rx_status():                                        # Check input pin
     if GPIO.input(pin) == 0:
         return True
@@ -22,7 +26,7 @@ def pulse_lenght():                                     # Returns lenght of a pu
         if not rx_status():
             break
     pulse_lenght = end_time - start_time
-    #print([end_time, start_time, pulse_lenght])
+    #print([end_time, start_time, pulse_lenght])        # For testing purposes
     if pulse_lenght > 0:
         return pulse_lenght
     else:
