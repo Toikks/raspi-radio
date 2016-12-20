@@ -1,6 +1,6 @@
 # Testing software for Raspberry pi B controlling a radio receiver salvaged from R/C helicopter toy
 # ASK modulation at 27,095 Mhz
-# Maximum speed is limited to 1,5 ms per bit due to relays used for interfacing GPIO with external signal.
+# Maximum speed cannot exceed 1,5 ms per bit due to relays used for interfacing GPIO with external signal.
 
 def rx_status():                                        # Check input pin
     if GPIO.input(pin) == 0:
