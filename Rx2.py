@@ -19,14 +19,14 @@ def wait_msg(rx_start=None):                            # Sleep until next broad
         while True:                                     # Record 8 bits to continue
             while not rx_status():
                 pass
-            msg.append(pulse_lenght())
+            msg.append(pulse_length())
             if len(msg) >= 8:
                 if len(msg) > 8:
                     break
                 return msg
 
 
-def pulse_lenght():                                     # Returns lenght of a pulse
+def pulse_length():                                     # Returns length of a pulse
     while True:
         while True:
             start_time = time.time()
@@ -40,7 +40,7 @@ def pulse_lenght():                                     # Returns lenght of a pu
 
         pulse_time = end_time - start_time
 
-        if pulse_time > noise_treshold:                 # Filter out noise
+        if pulse_time > noise_threshold:                 # Filter out noise
             return pulse_time
 
 
@@ -49,8 +49,8 @@ def starting_time(until_start):                         # Returns starting time 
 
 
 def get_num(msg):                                       # Turn sequence received into integer in range 0-255
-    for i in range(0, len(msg)):                        # Lenght of the pulse is compared to treshold and interpreted
-        if msg[i] > value_treshold:
+    for i in range(0, len(msg)):                        # Length of the pulse is compared to threshold and interpreted
+        if msg[i] > value_threshold:
             msg[i] = True
         else:
             msg[i] = False
@@ -65,24 +65,23 @@ def get_num(msg):                                       # Turn sequence received
 def get_char(number):                                   # Turn integer into letter
     if type(number) == list:                            # List of numbers is returned as list of characters
         for i in range(0, len(number)):
-            number[i] = chr(number[i] + 96)
+            number[i] = chr(number[i])
         return number
     else:
-        return chr(number + 96)
+        return chr(number)
 
 
 if __name__ == '__main__':
     import RPi.GPIO as GPIO
     import time
-    import sys
 
     # Settings
     pin = 9
     compensation = 0.0                                  # Difference in clocks
-    pulse = 0.015                                       # Base lenght for pulses in seconds
+    pulse = 0.03                                        # Base length for pulses in seconds
     transmission_density = 10                           # Time to wait between bytes
-    noise_treshold = 0.015                              # Minimum lenght for valid signal
-    value_treshold = 1.2 * pulse                        # Treshold to choose boolean values from signals
+    noise_threshold = 0.015                             # Minimum length for valid signal
+    value_threshold = 1.2 * pulse                       # Threshold to choose boolean values from signals
     GPIO.setmode(GPIO.BCM)                              # GPIO configuration
     GPIO.setup(pin, GPIO.IN)
 
@@ -93,4 +92,6 @@ if __name__ == '__main__':
         message = get_num(message)
         message = get_char(message)
         word.append(message)
-        print(''.join(word))
+        if word[-1] == '.':
+            print(''.join(word))
+            word = []
