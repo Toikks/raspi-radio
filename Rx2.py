@@ -76,7 +76,7 @@ if __name__ == '__main__':
     import time
 
     # Settings
-    pin = 9
+    pin = 9                                             # Input pin
     compensation = 0.0                                  # Difference in clocks
     pulse = 0.03                                        # Base length for pulses in seconds
     transmission_density = 10                           # Time to wait between bytes
