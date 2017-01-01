@@ -1,8 +1,3 @@
-# Testing software for Raspberry pi 3 controlling a radio transmitter salvaged from R/C helicopter toy
-# ASK modulation at 27,095 Mhz
-# Maximum speed cannot exceed 1,5 ms per bit due to relays used for interfacing GPIO with external signal.
-
-
 def tx_on():                      	                    # Turn on transmitter
     GPIO.output(pin, GPIO.LOW)
     return
