@@ -9,7 +9,7 @@ This software is used for testing purposes and is made for Raspberry pi B contro
 
 Transmitter/Receiver pair uses ASK modulation at 27,095 Mhz. Maximum speed cannot exceed 1,5 ms per bit due to relays used for interfacing GPIO with external signal. 
 
-This is one of the first python codes I have implemented in something useful. It's written with very low experience, but does reliably what it's supposed to.
-
 # Version with fs1000a
+Similiar software for transmitter and receiver module control.
 
+Rx2.py for receiver and Tx2.py for transmitter.
